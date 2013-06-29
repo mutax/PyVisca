@@ -48,25 +48,28 @@ class Visca():
 
 
 	def dump(self,packet,title=None):
-#		header=ord(packet[0])
+		if not packet or len(packet)==0:
+			return
+
+		header=ord(packet[0])
 		term=ord(packet[-1:])
 		qq=ord(packet[1])
 
-#		sender = (header&0b01110000)>>4
-#		broadcast = (header&0b1000)>>3
-#		recipient = (header&0b0111)
+		sender = (header&0b01110000)>>4
+		broadcast = (header&0b1000)>>3
+		recipient = (header&0b0111)
+
+		if broadcast:
+			recipient_s="*"
+		else:
+			recipient_s=str(recipient)
+
+		print "-----"
 
 		if title:
-			print "packet dump (%s):" % title
+			print "packet (%s) [%d => %s] len=%d: %s" % (title,sender,recipient_s,len(packet),packet.encode('hex'))
 		else:
-			print "packet dump:"
-
-		print " length.....: %02d" % len(packet)
-		print " packet.....: %s"   % packet.encode('hex')
-#		print " header.....: %02x" % header
-#		print "   sender   : %02x" % sender
-#		print "   broadcast: %02x" % broadcast
-#		print "   recipient: %02x" % recipient
+			print "packet [%d => %s] len=%d: %s" % (sender,sender,recipient_s,len(packet),packet.encode('hex'))
 
 		print " QQ.........: %02x" % qq
 
@@ -85,18 +88,12 @@ class Visca():
 				print "              (Camera [1])"
 			if rr==0x06:
 				print "              (Pan/Tilter)"
-		else:
-			rr=None
-
 
 		if len(packet)>4:
 			data=packet[3:-1]
 			print " Data.......: %s" % data.encode('hex')
 		else:
 			print " Data.......: None"
-
-#		print " Terminator.: %02x" %  term
-		print
 
 		if not term==0xff:
 			print "ERROR: Packet not terminated correctly"
@@ -141,17 +138,42 @@ class Visca():
 			print "Network Change - we should immedeately issue a renumbering!"
 
 
-	def recv_packet(self):
+	def recv_packet(self,extra_title=None):
 		# read up to 16 bytes until 0xff
 		packet=''
 		count=0
 		while count<16:
-			byte = ord(self.serialport.read(1))
-			count+=1
-			packet=packet+chr(byte)
+			s=self.serialport.read(1)
+			if s:
+				byte = ord(s)
+				count+=1
+				packet=packet+chr(byte)
+			else:
+				print "ERROR: Timeout waiting for reply"
+				break
 			if byte==0xff:
 				break
+
+		if extra_title:
+			self.dump(packet,"recv: %s" % extra_title)
+		else:
+			self.dump(packet,"recv")
 		return packet
+
+
+	def _write_packet(self,packet):
+
+		if not self.serialport.isOpen():
+			sys.exit(1)
+
+		# lets see if a completion message or someting
+		# else waits in the buffer. If yes dump it.
+		if self.serialport.inWaiting():
+			self.recv_packet("ignored")
+
+		self.serialport.write(packet)
+		self.dump(packet,"sent")
+
 
 
 	def send_packet(self,recipient,data):
@@ -196,16 +218,9 @@ class Visca():
 
 		self.mutex.acquire()
 
-		if not self.serialport.isOpen():
-			sys.exit(1)
-
-		self.serialport.flushInput() # flush stale data to resyncronize just in case (?)
-		# at this point we need that due to missing error handling/ complete messages
-		self.serialport.write(packet)
-		self.dump(packet,"sent")
+		self._write_packet(packet)
 
 		reply = self.recv_packet()
-		self.dump(reply,"received")
 
 
 		if reply[-1:] != '\xff':
@@ -228,6 +243,7 @@ class Visca():
 		return word as dword in visca format
 		packets are not allowed to be 0xff
 		so for numbers the first nibble is 0000
+		and 0xfd gets encoded into 0x0f 0x0xd
 		"""
 		ms = (value &  0b1111111100000000) >> 8
 		ls = (value &  0b0000000011111111)
@@ -249,6 +265,10 @@ class Visca():
 		first=1
 
 		reply = self.send_broadcast('\x30'+chr(first)) # set address
+
+		if not reply:
+			print "No reply from the bus."
+			sys.exit(1)
 
 		if len(reply)!=4 or reply[-1:]!='\xff':
 			print "ERROR enumerating devices"

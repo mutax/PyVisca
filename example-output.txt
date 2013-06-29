@@ -1,0 +1,246 @@
+-----
+packet (sent) [0 => *] len=4: 883001ff
+ QQ.........: 30
+ RR.........: 01
+ Data.......: None
+-----
+packet (recv) [0 => *] len=4: 883002ff
+ QQ.........: 30
+ RR.........: 02
+ Data.......: None
+debug: found 1 devices on the bus
+-----
+packet (sent) [0 => *] len=5: 88010001ff
+ QQ.........: 01
+              (Command)
+ RR.........: 00
+              (Interface)
+ Data.......: 01
+-----
+packet (recv) [0 => *] len=5: 88010001ff
+ QQ.........: 01
+              (Command)
+ RR.........: 00
+              (Interface)
+ Data.......: 01
+debug: all interfaces clear
+-----
+packet (sent) [0 => 1] len=6: 8101040002ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 0002
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=9: 8101044000000002ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 4000000002
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=6: 8101060602ff
+ QQ.........: 01
+              (Command)
+ RR.........: 06
+              (Pan/Tilter)
+ Data.......: 0602
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: ABS POS TO -1440/-360
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=15: 8101060214180f0a06000f0e0908ff
+ QQ.........: 01
+              (Command)
+ RR.........: 06
+              (Pan/Tilter)
+ Data.......: 0214180f0a06000f0e0908
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0100ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0100
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: ABS POS TO 1440/360
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=15: 81010602141800050a0000010608ff
+ QQ.........: 01
+              (Command)
+ RR.........: 06
+              (Pan/Tilter)
+ Data.......: 02141800050a0000010608
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0101ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0101
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: ABS POS TO 0/0
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=15: 8101060214180000000000000000ff
+ QQ.........: 01
+              (Command)
+ RR.........: 06
+              (Pan/Tilter)
+ Data.......: 0214180000000000000000
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0102ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0102
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0200ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0200
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0201ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0201
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+DEBUG: cam_memory command
+-----
+packet (recv: ignored) [1 => 0] len=3: 9051ff
+ QQ.........: 51
+ Data.......: None
+ packet: COMPLETION for socket 01
+-----
+packet (sent) [0 => 1] len=7: 8101043f0202ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 3f0202
+-----
+packet (recv) [1 => 0] len=3: 9041ff
+ QQ.........: 41
+ Data.......: None
+ packet: ACK for socket 01
+-----
+packet (sent) [0 => 1] len=6: 8101040003ff
+ QQ.........: 01
+              (Command)
+ RR.........: 04
+              (Camera [1])
+ Data.......: 0003
+-----
+packet (recv) [1 => 0] len=3: 9042ff
+ QQ.........: 42
+ Data.......: None
+ packet: ACK for socket 02

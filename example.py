@@ -170,6 +170,7 @@ def main():
 #	sleep(2)
 #	v.cmd_ptd_reset(CAM)
 
+	v.cmd_cam_power_off(CAM)
 
 if __name__ == '__main__':
     try:
